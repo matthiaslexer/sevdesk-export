@@ -109,6 +109,11 @@ const writeReportCSV = async (fsProvider, reportData, savePath) => {
         ? entry.categories.join(", ")
         : "",
       paidAmount: entry.paidAmount.toLocaleString("de"),
+      sumTax: entry.sumTax?.toLocaleString("de"),
+      taxRate: (100 / (entry.paidAmount - entry.sumTax) * entry.sumTax).toFixed(0),
+      comment: Array.isArray(entry.comment)
+      ? entry.comment.join(", ")
+      : "",
     };
   });
   const output = stringify(data, {
@@ -139,8 +144,20 @@ const writeReportCSV = async (fsProvider, reportData, savePath) => {
         header: "Zahlung Summe",
       },
       {
+        key: "sumTax",
+        header: "Summe MwSt.",
+      },
+      {
+        key: "taxRate",
+        header: "MwSt. Satz",
+      },
+      {
         key: "categories",
         header: "Kategorie",
+      },
+      {
+        key: "comment",
+        header: "Kommentar",
       },
       {
         key: "filename",

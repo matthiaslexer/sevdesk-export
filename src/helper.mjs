@@ -93,6 +93,14 @@ const getCategories = (positions) => {
   return categories;
 };
 
+const getComment = (positions) => {
+  const comments = positions.map((position) => {
+    return position.comment || "";
+  });
+
+  return comments;
+}
+
 const customFormat = (date, pattern = "PPP") => {
   return format(date, pattern, { locale: de });
 };
@@ -102,5 +110,6 @@ export {
   deleteAllFilesInDirectory,
   buildDocumentFileName,
   getCategories,
+  getComment,
   customFormat,
 };

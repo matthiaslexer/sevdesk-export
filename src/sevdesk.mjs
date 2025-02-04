@@ -2,8 +2,8 @@ import axios from "axios";
 import sanitizeFilename from "sanitize-filename";
 import {
   getCategories,
+  getComment,
   buildDocumentFileName,
-  dateToString,
 } from "./helper.mjs";
 
 /**
@@ -253,7 +253,10 @@ const buildVoucherReportData = (vouchers, options) => {
         "",
       payDate: payDate,
       paidAmount: voucher.paidAmount,
+      sumTax: voucher.sumTax,
+      taxRate: voucher.sumTax / voucher.paidAmount,
       categories: getCategories(voucher.positions),
+      comment: getComment(voucher.positions),
       filename: getDocumentFileName(voucher, "vouchers", options),
     });
   });
@@ -279,6 +282,8 @@ const buildInvoiceReportData = (invoices, options) => {
       contact: invoice.addressName || invoice.contact.name || "",
       payDate: payDate,
       paidAmount: invoice.paidAmount,
+      sumTax: invoice.sumTax,
+      taxRate: invoice.sumTax / invoice.paidAmount,
       categories: [],
       filename: getDocumentFileName(invoice, "invoices", options),
     });
