@@ -254,7 +254,6 @@ const buildVoucherReportData = (vouchers, options) => {
       payDate: payDate,
       paidAmount: voucher.paidAmount,
       sumTax: voucher.sumTax,
-      taxRate: voucher.sumTax / voucher.paidAmount,
       categories: getCategories(voucher.positions),
       comment: getComment(voucher.positions),
       filename: getDocumentFileName(voucher, "vouchers", options),
@@ -283,7 +282,6 @@ const buildInvoiceReportData = (invoices, options) => {
       payDate: payDate,
       paidAmount: invoice.paidAmount,
       sumTax: invoice.sumTax,
-      taxRate: invoice.sumTax / invoice.paidAmount,
       categories: [],
       filename: getDocumentFileName(invoice, "invoices", options),
     });
